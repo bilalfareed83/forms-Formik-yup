@@ -10,6 +10,13 @@ export const FormikForm = () => {
     onSubmit: (values) => {
       console.log(values);
     },
+    validate: (values) => {
+      let error = {};
+      if (!values.email) error.email = "email required";
+      if (!values.password) error.password = "enter password";
+
+      return error;
+    },
   });
   return (
     <div>
@@ -23,6 +30,11 @@ export const FormikForm = () => {
             onChange={formik.handleChange}
             value={formik.values.email}
           />
+          {formik.errors.email ? (
+            <div className="error">{formik.errors.email}</div>
+          ) : (
+            ""
+          )}
         </label>
         <br />
         <br />
@@ -35,6 +47,11 @@ export const FormikForm = () => {
             onChange={formik.handleChange}
             value={formik.values.password}
           />
+          {formik.errors.password ? (
+            <div className="error">{formik.errors.password}</div>
+          ) : (
+            ""
+          )}
         </label>
         <br />
         <br />
